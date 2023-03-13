@@ -48,10 +48,29 @@ $("#setting_lighting_mode").textContent = lightingModeOptions[i].value;
   }
 
   //TODO:: Validate the postal code with the Regular Expression,
-  //TODO:: Display an error if not valid
+  postal_ok = postalRegEx.test($("#location").value )
+  if (postal_ok)
+  {
+    $("#setting_location").value = $("#location").value;
+  }
 
+  //TODO:: Display an error if not valid
+else
+{
+  $("#location").value = "ERROR";
+}
   //TODO:: Validate the temperature by checking the range and if it's a number
   //TODO:: Display an error if not valid
+
+  if ( ($("#temperature").value = !isNaN) && (15 <$("#temperature").value < 25))
+  {
+    $("#setting_temperature").value = $("#temperature").value;
+
+  }
+  else
+  {
+    $("#temperature").value = "ERROR"
+  }
 
   evt.preventDefault();
 };
