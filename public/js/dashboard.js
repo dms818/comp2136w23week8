@@ -11,6 +11,8 @@ const onReset = (evt) => {
   $("#eco").checked = true;
   $("#temperature").value = 21;
   $("#location").value = "L7W 4T8";
+  $("#location_error").textContent = "";
+  $("#temperature_error").textContent = "";
 evt.preventDefault();
 
 
@@ -18,7 +20,10 @@ evt.preventDefault();
 };
 
 const onSubmit = (evt) => {
+  evt.preventDefault();
   //TODO::Reset any errors before submitting
+  $("#location_error").textContent = "";
+  $("#temperature_error").textContent = "";
 
   //TODO:: Set notifications since it doesn't need to be validated
   
@@ -46,33 +51,32 @@ $("#setting_lighting_mode").textContent = lightingModeOptions[i].value;
 
 
   }
-
+var postal = $("#location").value;
   //TODO:: Validate the postal code with the Regular Expression,
-  postal_ok = postalRegEx.test($("#location").value )
+  var postal_ok = postalRegEx.test(postal)
   if (postal_ok)
   {
-    $("#setting_location").value = $("#location").value;
+    $("#setting_location").textContent = postal;
   }
 
   //TODO:: Display an error if not valid
 else
 {
-  $("#location").value = "ERROR";
+  $("#location_error").textContent = "ERROR";
 }
   //TODO:: Validate the temperature by checking the range and if it's a number
   //TODO:: Display an error if not valid
 
-  if ( ($("#temperature").value = !isNaN) && (15 <$("#temperature").value < 25))
+  if ( (15 <$("#temperature").value && $("#temperature").value < 25))
   {
-    $("#setting_temperature").value = $("#temperature").value;
+    $("#setting_temperature").textContent = $("#temperature").value;
 
   }
   else
   {
-    $("#temperature").value = "ERROR"
+    $("#temperature_error").textContent = "ERROR"
   }
 
-  evt.preventDefault();
 };
 
 document.addEventListener("DOMContentLoaded", () => {
